@@ -12,17 +12,17 @@
 			<md-card class="you">
 				<md-input-container>
 					<label>name</label>
-					<md-input v-model="name"></md-input>
+					<md-input @keyup.enter.native="getAll" v-model="name"></md-input>
 				</md-input-container>
 			<md-input-container>
 				<label>Token</label>
-				<md-input v-model="token"></md-input>
+				<md-input @keyup.enter.native="getAll" v-model="token"></md-input>
 			</md-input-container>
 			<label>Select Time</label>
 			<input type="date" v-model="datePicker"></input>
 		</md-card>
 		<div class="date">
-			<span>Date: {{ firstdate | datetime }} - {{ lastdate | datetime }}</span>
+			<span>Count: {{count}} Date: {{ firstdate | datetime }} - {{ lastdate | datetime }}</span>
 		</div>
 			<div class="view" v-for="item in git">
 				<md-card class="my">
@@ -47,8 +47,10 @@ export default {
 	data () {
 		return {
 			git: [],
+			all: [],
 			page: 1,
-			name: 'AndreEtienne',
+			count: '',
+			name: '',
 			token: '',
 			datePicker: []
 		}
@@ -88,7 +90,9 @@ export default {
 			const myHeader = new Headers()
 			// myHeader.append('Accept','application/vnd.github.v3.text-match+json');
 			myHeader.append('Accept', 'application/vnd.github.cloak-preview')
-			myHeader.append('Authorization', 'token ' + token)
+			if (!this.token.length <= 0) {
+				myHeader.append('Authorization', 'token ' + token)
+			}
 			const header = {
 				method: 'GET',
 				headers: myHeader,
@@ -97,10 +101,15 @@ export default {
 			}
 			if (this.git.length >= 0) {
 				this.git = []
+				this.all = []
 			}
 			fetch(endpoint, header)
 				.then(blob => blob.json())
-				.then(data => this.git.push(...data.items))
+				.then((data) => {
+					this.all.push(data)
+					this.count = this.all[0].total_count
+					this.git.push(...data.items)
+				})
 		},
 		next: function () {
 			this.page ++
