@@ -82,7 +82,7 @@ export default {
 			this.datePicker.push(moment(date).format(datetimeFormat))
 		},
 		getAll: function () {
-			const token = '16e55270fb3c5141f3cf140d6b0247f072e28567'
+			const token = this.token
 			const parm = 'commits?q=author:AndreEtienne+author-date:<' + this.datePicker + '&sort=author-date&page=' + this.page + '&per_page=20'
 			const endpoint = 'https://api.github.com/search/' + encodeURI(parm)
 			const myHeader = new Headers()
