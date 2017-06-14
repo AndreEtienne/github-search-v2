@@ -48,7 +48,7 @@ export default {
 		return {
 			git: [],
 			page: 1,
-			name: '',
+			name: 'AndreEtienne',
 			token: '',
 			datePicker: []
 		}
@@ -83,7 +83,7 @@ export default {
 		},
 		getAll: function () {
 			const token = this.token
-			const parm = 'commits?q=author:AndreEtienne+author-date:<' + this.datePicker + '&sort=author-date&page=' + this.page + '&per_page=20'
+			const parm = 'commits?q=author:' + this.name + '+author-date:<' + this.datePicker + '&sort=author-date&page=' + this.page + '&per_page=20'
 			const endpoint = 'https://api.github.com/search/' + encodeURI(parm)
 			const myHeader = new Headers()
 			// myHeader.append('Accept','application/vnd.github.v3.text-match+json');

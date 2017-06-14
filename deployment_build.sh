@@ -4,7 +4,6 @@ set -ve
 
 
 GH_PAGES_REPO="github.com/AndreEtienne/github-search-v2.git"
-github.com/aexeagmbh/wizard-stage.ax-semantics.com.git
 NAME="$(git log --pretty=format:"%an" | head -n1)"
 EMAIL="$(git log --pretty=format:"%ae" | head -n1)"
 
