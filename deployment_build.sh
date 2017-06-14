@@ -9,6 +9,7 @@ EMAIL="$(git log --pretty=format:"%ae" | head -n1)"
 
 
 # Push static site to branch `gh-pages` of target repository
+npm install
 npm run build
 cd dist
 git init
