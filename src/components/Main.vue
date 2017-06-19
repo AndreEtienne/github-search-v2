@@ -6,7 +6,7 @@
 				<md-button  @click.native="back" class="md-raised md-primary">back</md-button>
 				<md-input-container>
 					<label>Page</label>
-					<md-input v-model="page"></md-input>
+					<md-input v-model="page" @keyup.enter.native="getAll"></md-input>
 				</md-input-container>
 			</md-card>
 			<md-card class="you">
@@ -56,8 +56,7 @@ export default {
 		}
 	},
 	watch: {
-		datePicker: 'getAll',
-		page: 'getAll'
+		datePicker: 'getAll'
 	},
 	computed: {
 		firstdate () {
@@ -113,9 +112,11 @@ export default {
 		},
 		next: function () {
 			this.page ++
+			this.getAll()
 		},
 		back: function () {
 			this.page --
+			this.getAll()
 		}
 	}
 }
