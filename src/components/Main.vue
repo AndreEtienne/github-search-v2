@@ -1,14 +1,8 @@
 <template>
 	<div id="main">
-			<md-card class="my">
-				<md-button  @click.native="getAll" class="md-raised md-primary">Get</md-button>
-				<md-button  @click.native="next" class="md-raised md-primary">Next</md-button>
-				<md-button  @click.native="back" class="md-raised md-primary">back</md-button>
-				<md-input-container>
-					<label>Page</label>
-					<md-input v-model="page" @keyup.enter.native="getAll"></md-input>
-				</md-input-container>
-			</md-card>
+			<div class="header">
+					<h1>Welcome </h1>
+			</div>
 			<md-card class="you">
 				<md-input-container>
 					<label>name</label>
@@ -21,9 +15,19 @@
 			<label>Select Time</label>
 			<input type="date" v-model="datePicker" @keyup.enter.native="getAll" ></input>
 		</md-card>
+		
 		<div class="date">
-			<span>Count: {{count}} Date: {{ lastdate | datetime }} - {{ firstdate | datetime }}</span>
+			<span>{{ lastdate | datetime }} - {{ firstdate | datetime }}</span>
+			<md-input-container>
+				<label>Page</label>
+				<md-input v-model="page" @keyup.enter.native="getAll"></md-input>
+			</md-input-container>
 		</div>
+		<md-card class="my button">
+			<md-button  @click.native="getAll" class="md-raised md-primary">Get</md-button>
+			<md-button  @click.native="back" class="md-raised md-primary">back</md-button>
+			<md-button  @click.native="next" class="md-raised md-primary">Next</md-button>
+		</md-card>
 			<div class="view" v-for="item in git">
 				<md-card class="my">
 				 <div class="view-item">
@@ -123,6 +127,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.header{
+	display: flex;
+	justify-content: center;
+}
+.my.button{
+	display: flex;
+	flex: 1;
+}
+.my.button button{
+	display: flex;
+	flex: 1;
+}
+.my.button div{
+	flex: 1;
+}
+
 .md-card{
 	 margin-bottom: 15px;
 }
@@ -134,6 +154,9 @@ export default {
   flex: 1;
   flex-direction: row;
 }
+.you{
+	margin-bottom: 80px;
+}
 .md-card.you{
 	padding: 15px;
 	margin-left: auto;
@@ -142,6 +165,7 @@ export default {
 }
 .view-item{
 	justify-content: center;
+	align-items: center;
 	flex-direction: column;
 	min-height: 80px;
 	font-size: 15px;
@@ -154,9 +178,24 @@ export default {
 	flex: 4;
 }
 .date{
-	margin: 20px 0px;
+	margin-bottom: 30px;
+	width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
 	font-size: 35px;
 	display: flex;
-	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+}
+.date span b{
+	
+}
+.date div{
+	display: flex;
+	width: 10%;
+}
+.date span{
+	display: flex;
+	width: 80%;
 }
 </style>
