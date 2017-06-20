@@ -19,15 +19,16 @@
 				<md-input @keyup.enter.native="getAll" v-model="token"></md-input>
 			</md-input-container>
 			<label>Select Time</label>
-			<input type="date" v-model="datePicker"></input>
+			<input type="date" v-model="datePicker" @keyup.enter.native="getAll" ></input>
 		</md-card>
 		<div class="date">
-			<span>Count: {{count}} Date: {{ firstdate | datetime }} - {{ lastdate | datetime }}</span>
+			<span>Count: {{count}} Date: {{ lastdate | datetime }} - {{ firstdate | datetime }}</span>
 		</div>
 			<div class="view" v-for="item in git">
 				<md-card class="my">
 				 <div class="view-item">
-				 {{ item.commit.author.date | datetime }} 
+				 <b>{{ item.commit.author.date | datetime }} </b>
+				 	<a  v-bind:href="item.html_url">Link</a>
 				</div> 
 				<div class="view-item main">
 				{{ item.commit.message }}
@@ -55,9 +56,6 @@ export default {
 			datePicker: []
 		}
 	},
-	watch: {
-		datePicker: 'getAll'
-	},
 	computed: {
 		firstdate () {
 			if (this.git.length >= 1) {
@@ -75,6 +73,7 @@ export default {
 	},
 	mounted () {
 		this.getTime()
+		this.getAll()
 	},
 	methods: {
 		getTime: function () {
@@ -111,7 +110,7 @@ export default {
 				})
 		},
 		next: function () {
-			this.page ++
+			this.page <= 20 ? this.page ++ : ''
 			this.getAll()
 		},
 		back: function () {
